@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Random Walk Lab - Interactive random walk simulation">
+  <title>Random Walk Lab | 隨機漫步實驗室</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/simulator.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="./">RANDOM WALK <span>LAB</span></a>
+    <nav aria-label="主要導覽">
+      <a href="#simulator">Simulator</a>
+      <a href="#theory">Theory</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <p class="eyebrow">PROBABILITY · STOCHASTIC PROCESSES</p>
+      <h1>Random Walk <span>Lab</span></h1>
+      <p class="hero-text">透過互動式模擬，觀察隨機漫步的路徑變化，並比較實驗結果與理論值。</p>
+    </section>
+
+    <section class="panel simulator-panel" id="simulator">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">INTERACTIVE SIMULATION</p>
+          <h2>隨機漫步模擬器</h2>
+        </div>
+        <span class="status"><span class="status-dot"></span> READY</span>
+      </div>
+
+      <div class="controls">
+        <label class="control">
+          <span>Steps <strong id="stepsValue">50</strong></span>
+          <input id="steps" type="range" min="10" max="200" step="10" value="50">
+          <span class="range-labels"><small>10</small><small>200</small></span>
+        </label>
+        <label class="control">
+          <span>Probability <strong id="probValue">0.60</strong></span>
+          <input id="probability" type="range" min="0.10" max="0.90" step="0.05" value="0.60">
+          <span class="range-labels"><small>0.10</small><small>0.90</small></span>
+        </label>
+        <button id="simulate" class="primary-button" type="button">重新模擬 <span aria-hidden="true">↗</span></button>
+      </div>
+
+      <div class="chart-wrap">
+        <canvas id="walkChart" role="img" aria-label="隨機漫步模擬圖表"></canvas>
+        <div class="legend">
+          <span><i class="legend-line blue"></i> Sample Paths</span>
+          <span><i class="legend-line orange"></i> Average Path</span>
+          <span><i class="legend-line teal"></i> Theoretical Mean Path</span>
+        </div>
+      </div>
+
+      <div class="results">
+        <div class="result-card">
+          <span>Sample Mean</span>
+          <strong id="sampleMean">—</strong>
+          <small>模擬終點平均值</small>
+        </div>
+        <div class="result-card">
+          <span>Theoretical Mean</span>
+          <strong id="theoreticalMean">—</strong>
+          <small>理論終點期望值</small>
+        </div>
+        <div class="result-card">
+          <span>Sample Variance</span>
+          <strong id="sampleVariance">—</strong>
+          <small>樣本終點變異數</small>
+        </div>
+        <div class="result-card">
+          <span>Theoretical Variance</span>
+          <strong id="theoreticalVariance">—</strong>
+          <small>理論終點變異數</small>
+        </div>
+      </div>
+      <p class="note">每次模擬產生 20 條獨立隨機路徑。有限次模擬的統計結果會與理論值有所差異。</p>
+    </section>
+
+    <section class="panel theory-panel" id="theory">
+      <p class="eyebrow">MATHEMATICAL MODEL</p>
+      <h2>數學模型</h2>
+      <p>令每一步的移動量為隨機變數 \(Y_i\)，向右移動為 +1，向左移動為 −1。</p>
+      <div class="formula">
+        <p>X<sub>n</sub> = X<sub>0</sub> + ∑<sub>i=1</sub><sup>n</sup> Y<sub>i</sub></p>
+        <p>P(Y<sub>i</sub> = 1) = p, &nbsp; P(Y<sub>i</sub> = −1) = 1 − p</p>
+        <p>E[X<sub>n</sub>] = X<sub>0</sub> + n(2p − 1)</p>
+        <p>Var(X<sub>n</sub>) = 4np(1 − p)</p>
+      </div>
+      <p class="note">本模擬器從 X₀ = 0 開始，並假設每一步的移動彼此獨立且具有相同分布。</p>
+    </section>
+
+    <section class="panel about-panel" id="about">
+      <p class="eyebrow">ABOUT THIS PROJECT</p>
+      <h2>About Random Walk Lab</h2>
+      <p>Random Walk Lab 是一個以機率與隨機過程為主題的互動學習小專案。使用者可以調整參數、觀察樣本路徑，並將模擬統計量與數學理論進行比較。</p>
+    </section>
+  </main>
+
+  <footer>
+    <span>RANDOM WALK LAB</span>
+    <span>Interactive Probability Learning</span>
+  </footer>
+</body>
+</html>
